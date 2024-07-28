@@ -28,6 +28,8 @@ email: String
 Frontend Setup
 Basic structure set up for React components, including directories for components and services.
 State management planned to handle user sessions and cart data.
+
 Notes
+
 The project is set up using Git and GitHub for version control.
 Further development will include implementing user interfaces for product listings, shopping cart, and checkout.
