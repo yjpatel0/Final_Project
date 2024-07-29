@@ -1,28 +1,21 @@
+// project/backend/routes/productRoutes.js
 const express = require('express');
-const Product = require('../models/productModel');
 const router = express.Router();
+const { getProducts, createProduct, updateProduct, deleteProduct, getProductById } = require('../controllers/productController');
 
-// Get all products
-router.get('/', async (req, res) => {
-    try {
-        const products = await Product.find();
-        res.json(products);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
+// Route to get all products
+router.get('/', getProducts);
 
-// Create a new product
-router.post('/', async (req, res) => {
-    const { name, price, description, category } = req.body;
-    const newProduct = new Product({ name, price, description, category });
+// Route to get a single product by id
+router.get('/:id', getProductById);
 
-    try {
-        const savedProduct = await newProduct.save();
-        res.status(201).json(savedProduct);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-});
+// Route to create a new product
+router.post('/', createProduct);
+
+// Route to update a product by id
+router.put('/:id', updateProduct);
+
+// Route to delete a product by id
+router.delete('/:id', deleteProduct);
 
 module.exports = router;
