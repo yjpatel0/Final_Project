@@ -1,35 +1,58 @@
-Student Name: Yash Patel   
-Student Number: 8981052
-Date: 07/19/2024
+# E-Commerce Website
 
-Technology Stack
-Frontend: ReactJS
-Backend: Node.js with Express
-Database: MongoDB (Atlas)
+**Student Name:** Yash Patel  
+**Student Number:** 8981052  
+**Date:** 07/19/2024
 
-Project Setup
-Project Initialization: Repository created on GitHub and cloned to local machine.
-Frontend Setup: Initialized ReactJS project.
-Backend Setup: Initialized Node.js project with Express and connected to MongoDB (Atlas).
-Database Schema Design
-Products Schema (MongoDB)
+## Project Setup
 
-name: String
-description: String
-price: Number
-category: String
-stock: Number
-imageUrl: String
-Users Schema (MongoDB)
+### Backend
 
-username: String
-password: String
-email: String
-Frontend Setup
-Basic structure set up for React components, including directories for components and services.
-State management planned to handle user sessions and cart data.
+1. Navigate to the `backend` directory:
+    ```sh
+    cd backend
+    ```
 
-Notes
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
 
-The project is set up using Git and GitHub for version control.
-Further development will include implementing user interfaces for product listings, shopping cart, and checkout.
+3. Start the backend server:
+    ```sh
+    node server.js
+    ```
+
+### Frontend
+
+4. Navigate to the `frontend` directory:
+    ```sh
+    cd ../frontend
+    ```
+
+5. Install dependencies:
+    ```sh
+    npm install
+    ```
+
+6. Start the React app:
+    ```sh
+    npm start
+    ```
+
+## Features
+
+- **Product Listings:** Display products with details.
+- **Shopping Cart:** Allow users to add products to a cart and manage the cart.
+- **Checkout Process:** Implement a simple checkout process, including order summary.
+
+## Technology Stack
+
+- **Frontend:** ReactJS
+- **Backend:** Node.js with Express
+- **Database:** MongoDB (Atlas)
+
+## Notes
+
+- The project is set up using Git and GitHub for version control.
+- Further development will include implementing user interfaces for product listings, shopping cart, and checkout.
