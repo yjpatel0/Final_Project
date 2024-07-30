@@ -45,4 +45,78 @@
   .checkout-button:hover {
     background-color: #0056b3;
   }
-  
+  /* General Container Styling */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header Styling */
+h1.my-4 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Cart Item Styling */
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.card-text {
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.text-muted {
+  color: #888;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+.btn-danger:focus {
+  outline: none;
+}
+
+.form-control {
+  display: inline-block;
+  width: auto;
+  margin-right: 10px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-md-4 {
+  flex: 1;
+  max-width: 33.333%;
+  padding: 10px;
+}

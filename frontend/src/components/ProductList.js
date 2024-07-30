@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
 import './ProductList.css';
 
@@ -10,28 +9,42 @@ const ProductList = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const { data } = await axios.get('http://localhost:5000/api/products');
-      setProducts(data);
+      try {
+        const response = await axios.get('http://localhost:5000/api/products');
+        setProducts(response.data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
     };
 
     fetchProducts();
   }, []);
 
-  const handleAddToCart = (product) => {
-    dispatch({ type: 'ADD_TO_CART', product });
+  const addToCart = (product) => {
+    dispatch({ type: 'ADD_TO_CART', payload: product });
   };
 
   return (
-    <div className="product-list">
-      <h1>Product List</h1>
-      <div className="product-grid">
+    <div className="container">
+      <h1 className="my-4">Product List</h1>
+      <div className="row">
         {products.map(product => (
-          <div key={product._id} className="product-card">
-            <h2>{product.name}</h2>
-            <p>{product.description}</p>
-            <p>Price: ${product.price}</p>
-            <button onClick={() => handleAddToCart(product)}>Add to Cart</button>
-            <Link to={`/product/${product._id}`}>View Details</Link>
+          <div className="col-md-4" key={product._id}>
+            <div className="card mb-4 shadow-sm">
+              <div className="card-body">
+                <h5 className="card-title">{product.name}</h5>
+                <p className="card-text">{product.description}</p>
+                <div className="d-flex justify-content-between align-items-center">
+                  <small className="text-muted">${product.price}</small>
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => addToCart(product)}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         ))}
       </div>

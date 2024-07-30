@@ -1,27 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const ProductDetails = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
+  const [product, setProduct] = useState({});
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/products/${id}`)
+    axios.get(`/api/products/${id}`)
       .then(response => setProduct(response.data))
       .catch(error => console.error('Error fetching product details:', error));
   }, [id]);
 
-  if (!product) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div>
-      <h2>{product.name}</h2>
-      <p>{product.description}</p>
-      <p>Price: {product.price}</p>
-      <button>Add to Cart</button>
+    <div className="container mt-5">
+      <h1 className="text-center">{product.name}</h1>
+      <div className="row">
+        <div className="col-md-6">
+          <img src={product.image} className="img-fluid" alt={product.name} />
+        </div>
+        <div className="col-md-6">
+          <h2>Description</h2>
+          <p>{product.description}</p>
+          <h3>Price: ${product.price}</h3>
+          <button className="btn btn-success">Add to Cart</button>
+        </div>
+      </div>
     </div>
   );
 };
