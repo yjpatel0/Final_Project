@@ -1,22 +1,25 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout';
+import { CartProvider } from './contexts/CartContext';
 import './App.css';
 
 const App = () => {
   return (
     <Router>
-      <div className="container">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <Link className="navbar-brand" to="/">Home</Link>
-          <Link className="navbar-brand" to="/cart">Cart</Link>
-        </nav>
-        <Routes>
-          <Route path="/" element={<ProductList />} />
-          <Route path="/cart" element={<Cart />} />
-        </Routes>
-      </div>
+      <CartProvider>
+        <Navbar />
+        <div className="container">
+          <Routes>
+            <Route path="/" element={<ProductList />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
+          </Routes>
+        </div>
+      </CartProvider>
     </Router>
   );
 };

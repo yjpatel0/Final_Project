@@ -1,20 +1,8 @@
 import React from 'react';
 import { useCart } from '../contexts/CartContext';
-import { Link } from 'react-router-dom';
 
-const Cart = () => {
-  const { cart, dispatch } = useCart();
-
-  const removeFromCart = (product) => {
-    dispatch({ type: 'REMOVE_FROM_CART', payload: product });
-  };
-
-  const adjustQuantity = (product, quantity) => {
-    dispatch({
-      type: 'ADJUST_QUANTITY',
-      payload: { ...product, quantity: Math.max(quantity, 1) }
-    });
-  };
+const Checkout = () => {
+  const { cart } = useCart();
 
   const getTotalPrice = () => {
     return cart.reduce((total, product) => total + product.price * (product.quantity || 1), 0);
@@ -22,7 +10,7 @@ const Cart = () => {
 
   return (
     <div className="container">
-      <h1 className="my-4">Shopping Cart</h1>
+      <h1 className="my-4">Checkout</h1>
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
@@ -36,19 +24,8 @@ const Cart = () => {
                     <p className="card-text">{product.description}</p>
                     <div className="d-flex justify-content-between align-items-center">
                       <small className="text-muted">${product.price}</small>
-                      <input
-                        type="number"
-                        value={product.quantity || 1}
-                        onChange={(e) => adjustQuantity(product, parseInt(e.target.value))}
-                        min="1"
-                        className="form-control w-25"
-                      />
-                      <button
-                        className="btn btn-danger"
-                        onClick={() => removeFromCart(product)}
-                      >
-                        Remove
-                      </button>
+                      <small className="text-muted">Quantity: {product.quantity}</small>
+                      <small className="text-muted">Total: ${product.price * (product.quantity || 1)}</small>
                     </div>
                   </div>
                 </div>
@@ -57,9 +34,7 @@ const Cart = () => {
           </div>
           <div className="d-flex justify-content-between align-items-center">
             <h4>Total Price: ${getTotalPrice()}</h4>
-            <Link to="/checkout" className="btn btn-primary">
-              Checkout
-            </Link>
+            <button className="btn btn-success">Proceed to Payment</button>
           </div>
         </>
       )}
@@ -67,4 +42,4 @@ const Cart = () => {
   );
 };
 
-export default Cart;
+export default Checkout;

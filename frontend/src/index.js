@@ -1,13 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './index.css';
 import App from './App';
-import { CartProvider } from './contexts/CartContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <CartProvider>
-      <App />
-    </CartProvider>
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
