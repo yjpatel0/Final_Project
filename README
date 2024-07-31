@@ -52,6 +52,21 @@
 - **Backend:** Node.js with Express
 - **Database:** MongoDB (Atlas)
 
+## Database Schema
+
+### Products Schema
+- **name:** String
+- **description:** String
+- **price:** Number
+- **category:** String
+- **stock:** Number
+- **imageUrl:** String
+
+### Users Schema
+- **username:** String
+- **password:** String
+- **email:** String
+
 ## Notes
 
 - The project is set up using Git and GitHub for version control.
