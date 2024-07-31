@@ -1,0 +1,14 @@
+.navbar-brand {
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .navbar-nav .nav-link {
+    margin-right: 15px;
+    font-size: 18px;
+  }
+  
+  .navbar {
+    box-shadow: 0 4px 6px -6px #222;
+  }
+  

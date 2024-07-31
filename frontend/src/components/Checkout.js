@@ -1,12 +1,16 @@
 import React from 'react';
 import { useCart } from '../contexts/CartContext';
+import './Checkout.css';
 
 const Checkout = () => {
-  const { cart } = useCart();
+  const { cart, dispatch } = useCart();
 
-  const getTotalPrice = () => {
-    return cart.reduce((total, product) => total + product.price * (product.quantity || 1), 0);
+  const handleCheckout = () => {
+    alert('Checkout successful!');
+    dispatch({ type: 'CLEAR_CART' });
   };
+
+  const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   return (
     <div className="container">
@@ -14,29 +18,18 @@ const Checkout = () => {
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <>
-          <div className="row">
+        <div>
+          <ul className="list-group mb-4">
             {cart.map(product => (
-              <div className="col-md-4" key={product._id}>
-                <div className="card mb-4 shadow-sm">
-                  <div className="card-body">
-                    <h5 className="card-title">{product.name}</h5>
-                    <p className="card-text">{product.description}</p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <small className="text-muted">${product.price}</small>
-                      <small className="text-muted">Quantity: {product.quantity}</small>
-                      <small className="text-muted">Total: ${product.price * (product.quantity || 1)}</small>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <li className="list-group-item d-flex justify-content-between align-items-center" key={product._id}>
+                {product.name} - ${product.price} x {product.quantity}
+                <span>${product.price * product.quantity}</span>
+              </li>
             ))}
-          </div>
-          <div className="d-flex justify-content-between align-items-center">
-            <h4>Total Price: ${getTotalPrice()}</h4>
-            <button className="btn btn-success">Proceed to Payment</button>
-          </div>
-        </>
+          </ul>
+          <h3>Total: ${totalPrice.toFixed(2)}</h3>
+          <button className="btn btn-success btn-block" onClick={handleCheckout}>Proceed to Checkout</button>
+        </div>
       )}
     </div>
   );

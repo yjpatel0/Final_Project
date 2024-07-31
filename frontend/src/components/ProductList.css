@@ -1,74 +1,26 @@
-/* General Container Styling */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-/* Header Styling */
-h1.my-4 {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
-
-/* Product Card Styling */
 .card {
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s;
 }
 
 .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
-.card-body {
-  padding: 20px;
+  transform: scale(1.05);
 }
 
 .card-title {
-  font-size: 1.25rem;
+  font-size: 20px;
   font-weight: bold;
 }
 
 .card-text {
+  font-size: 16px;
   color: #555;
-  margin-bottom: 10px;
 }
 
-.text-muted {
-  color: #888;
-}
-
-.btn-primary {
+.btn {
   background-color: #007bff;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
+  color: white;
 }
 
-.btn-primary:hover {
+.btn:hover {
   background-color: #0056b3;
-}
-
-.btn-primary:focus {
-  outline: none;
-}
-
-.row {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.col-md-4 {
-  flex: 1;
-  max-width: 33.333%;
-  padding: 10px;
 }

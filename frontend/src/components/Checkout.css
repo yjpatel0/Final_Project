@@ -1,0 +1,15 @@
+/* Checkout.css */
+
+.container {
+    margin-top: 20px;
+  }
+  
+  .list-group-item {
+    font-size: 1.1rem;
+  }
+  
+  .btn {
+    font-size: 1rem;
+    margin-top: 20px;
+  }
+  
