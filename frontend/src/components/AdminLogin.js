@@ -1,29 +1,34 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AdminLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    // Implement your admin login logic here
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (username === 'admin' && password === 'password') {
+      navigate('/admin');
+    } else {
+      alert('Invalid credentials');
+    }
   };
 
   return (
-    <div>
-      <h2>Admin Login</h2>
-      <input 
-        type="text" 
-        placeholder="Username" 
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input 
-        type="password" 
-        placeholder="Password" 
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={handleLogin}>Login</button>
+    <div className="container">
+      <h1 className="my-4">Admin Login</h1>
+      <form onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input type="text" className="form-control" id="username" value={username} onChange={(e) => setUsername(e.target.value)} required />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input type="password" className="form-control" id="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+        </div>
+        <button type="submit" className="btn btn-primary mt-3">Login</button>
+      </form>
     </div>
   );
 };

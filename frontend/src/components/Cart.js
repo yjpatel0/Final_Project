@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useCart } from '../contexts/CartContext';
-import './Cart.css';
+import { Link } from 'react-router-dom';
 
 const Cart = () => {
   const { cart, dispatch } = useCart();
@@ -17,15 +16,13 @@ const Cart = () => {
     });
   };
 
-  const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
   return (
     <div className="container">
       <h1 className="my-4">Shopping Cart</h1>
       {cart.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <div>
+        <>
           <div className="row">
             {cart.map(product => (
               <div className="col-md-4" key={product._id}>
@@ -54,9 +51,8 @@ const Cart = () => {
               </div>
             ))}
           </div>
-          <h3>Total: ${totalPrice.toFixed(2)}</h3>
-          <Link to="/checkout" className="btn btn-success btn-block">Proceed to Checkout</Link>
-        </div>
+          <Link to="/checkout" className="btn btn-primary mt-4">Proceed to Checkout</Link>
+        </>
       )}
     </div>
   );

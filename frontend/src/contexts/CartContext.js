@@ -18,8 +18,6 @@ const cartReducer = (state, action) => {
       return state.map(item =>
         item._id === action.payload._id ? { ...item, quantity: action.payload.quantity } : item
       );
-    case 'CLEAR_CART':
-      return [];
     default:
       return state;
   }
