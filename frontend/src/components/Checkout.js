@@ -1,93 +1,99 @@
 import React, { useState } from 'react';
 import { useCart } from '../contexts/CartContext';
-import { Link } from 'react-router-dom';
+import './Checkout.css';
 
 const Checkout = () => {
   const { cart } = useCart();
   const [userDetails, setUserDetails] = useState({
     name: '',
-    email: '',
-    address: ''
+    address: '',
+    phone: '',
+    email: ''
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserDetails({ ...userDetails, [name]: value });
-  };
-
-  const calculateTotalPrice = () => {
-    return cart.reduce((total, item) => total + item.price * item.quantity, 0);
+    setUserDetails({
+      ...userDetails,
+      [name]: value
+    });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Process order submission here (you can add your own logic)
-    console.log('Order submitted', { cart, userDetails });
+    // Handle order submission logic here
+    alert('Order placed successfully!');
   };
 
+  const totalAmount = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
   return (
-    <div className="container">
-      <h1 className="my-4">Checkout</h1>
-      {cart.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <>
-          <div className="row">
-            {cart.map(product => (
-              <div className="col-md-4" key={product._id}>
-                <div className="card mb-4 shadow-sm">
-                  <div className="card-body">
-                    <h5 className="card-title">{product.name}</h5>
-                    <p className="card-text">{product.description}</p>
-                    <p className="card-text">Quantity: {product.quantity}</p>
-                    <p className="card-text">Price: ${product.price.toFixed(2)}</p>
-                    <p className="card-text">Total: ${(product.price * product.quantity).toFixed(2)}</p>
-                  </div>
-                </div>
+    <div className="checkout-container">
+      <h1>Checkout</h1>
+      <form onSubmit={handleSubmit} className="checkout-form">
+        <h2>Shipping Information</h2>
+        <div className="form-group">
+          <label htmlFor="name">Name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            value={userDetails.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="address">Address</label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            value={userDetails.address}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="phone">Phone</label>
+          <input
+            type="text"
+            id="phone"
+            name="phone"
+            value={userDetails.phone}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            value={userDetails.email}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <h2>Order Summary</h2>
+        <ul className="order-summary">
+          {cart.map((item) => (
+            <li key={item._id}>
+              <div>
+                <span>{item.name} (x{item.quantity})</span>
+                <span>${item.price.toFixed(2)}</span>
               </div>
-            ))}
-          </div>
-          <h3 className="my-4">Total Price: ${calculateTotalPrice().toFixed(2)}</h3>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                className="form-control"
-                value={userDetails.name}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="form-control"
-                value={userDetails.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="address">Address</label>
-              <textarea
-                id="address"
-                name="address"
-                className="form-control"
-                value={userDetails.address}
-                onChange={handleChange}
-                required
-              ></textarea>
-            </div>
-            <button type="submit" className="btn btn-primary mt-4">Place Order</button>
-          </form>
-        </>
-      )}
+            </li>
+          ))}
+        </ul>
+        <div className="total-amount">
+          <h3>Total: ${totalAmount.toFixed(2)}</h3>
+        </div>
+
+        <button type="submit" className="checkout-button">Place Order</button>
+      </form>
     </div>
   );
 };
