@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import ProductList from './components/ProductList';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
-import AdminDashboard from './components/AdminDashboard';
+import AdminLogin from './components/AdminLogin'; // Updated import
 import { CartProvider } from './contexts/CartContext';
 
 const App = () => {
@@ -17,7 +17,7 @@ const App = () => {
             <Route path="/" element={<ProductList />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
-            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin-login" element={<AdminLogin />} /> {/* Updated route */}
           </Routes>
         </div>
       </Router>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
@@ -11,11 +12,19 @@ const AdminDashboard = () => {
     category: ''
   });
   const [newCategory, setNewCategory] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication status
+  const navigate = useNavigate();
 
   useEffect(() => {
-    fetchProducts();
-    fetchCategories();
-  }, []);
+    // Check authentication status
+    // For simplicity, we'll assume the user is authenticated if this component is rendered
+    if (!isAuthenticated) {
+      navigate('/admin-login');
+    } else {
+      fetchProducts();
+      fetchCategories();
+    }
+  }, [isAuthenticated, navigate]);
 
   const fetchProducts = async () => {
     try {
