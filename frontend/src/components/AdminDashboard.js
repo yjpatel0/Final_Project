@@ -5,26 +5,21 @@ import { useNavigate } from 'react-router-dom';
 const AdminDashboard = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [newProduct, setNewProduct] = useState({
-    name: '',
-    description: '',
-    price: 0,
-    category: ''
-  });
+  const [newProduct, setNewProduct] = useState({ name: '', description: '', price: 0, category: '' });
   const [newCategory, setNewCategory] = useState('');
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track authentication status
+  const [isLoadingProducts, setIsLoadingProducts] = useState(true);
+  const [isLoadingCategories, setIsLoadingCategories] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Check authentication status
-    // For simplicity, we'll assume the user is authenticated if this component is rendered
+    const isAuthenticated = localStorage.getItem('isAuthenticated');
     if (!isAuthenticated) {
       navigate('/admin-login');
     } else {
       fetchProducts();
       fetchCategories();
     }
-  }, [isAuthenticated, navigate]);
+  }, [navigate]);
 
   const fetchProducts = async () => {
     try {
@@ -32,6 +27,8 @@ const AdminDashboard = () => {
       setProducts(response.data);
     } catch (error) {
       console.error('Error fetching products:', error);
+    } finally {
+      setIsLoadingProducts(false);
     }
   };
 
@@ -41,14 +38,13 @@ const AdminDashboard = () => {
       setCategories(response.data);
     } catch (error) {
       console.error('Error fetching categories:', error);
+    } finally {
+      setIsLoadingCategories(false);
     }
   };
 
   const handleProductChange = (e) => {
-    setNewProduct({
-      ...newProduct,
-      [e.target.name]: e.target.value
-    });
+    setNewProduct({ ...newProduct, [e.target.name]: e.target.value });
   };
 
   const handleCategoryChange = (e) => {
@@ -60,12 +56,7 @@ const AdminDashboard = () => {
     try {
       await axios.post('http://localhost:5000/api/products', newProduct);
       fetchProducts();
-      setNewProduct({
-        name: '',
-        description: '',
-        price: 0,
-        category: ''
-      });
+      setNewProduct({ name: '', description: '', price: 0, category: '' });
     } catch (error) {
       console.error('Error adding product:', error);
     }
@@ -103,7 +94,7 @@ const AdminDashboard = () => {
   return (
     <div className="container">
       <h1 className="my-4">Admin Dashboard</h1>
-      
+
       <h2>Products</h2>
       <form onSubmit={handleProductSubmit}>
         <div className="form-group">
@@ -129,7 +120,7 @@ const AdminDashboard = () => {
         </div>
         <button type="submit" className="btn btn-primary mt-3">Add Product</button>
       </form>
-      
+
       <h2 className="mt-5">Categories</h2>
       <form onSubmit={handleCategorySubmit}>
         <div className="form-group">
@@ -140,28 +131,36 @@ const AdminDashboard = () => {
       </form>
 
       <h3 className="mt-5">Product List</h3>
-      <ul className="list-group">
-        {products.map(product => (
-          <li key={product._id} className="list-group-item d-flex justify-content-between align-items-center">
-            {product.name}
-            <div>
-              <button onClick={() => handleProductDelete(product._id)} className="btn btn-danger btn-sm">Delete</button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      {isLoadingProducts ? (
+        <p>Loading products...</p>
+      ) : (
+        <ul className="list-group">
+          {products.map(product => (
+            <li key={product._id} className="list-group-item d-flex justify-content-between align-items-center">
+              {product.name}
+              <div>
+                <button onClick={() => handleProductDelete(product._id)} className="btn btn-danger btn-sm">Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <h3 className="mt-5">Category List</h3>
-      <ul className="list-group">
-        {categories.map(category => (
-          <li key={category._id} className="list-group-item d-flex justify-content-between align-items-center">
-            {category.name}
-            <div>
-              <button onClick={() => handleCategoryDelete(category._id)} className="btn btn-danger btn-sm">Delete</button>
-            </div>
-          </li>
-        ))}
-      </ul>
+      {isLoadingCategories ? (
+        <p>Loading categories...</p>
+      ) : (
+        <ul className="list-group">
+          {categories.map(category => (
+            <li key={category._id} className="list-group-item d-flex justify-content-between align-items-center">
+              {category.name}
+              <div>
+                <button onClick={() => handleCategoryDelete(category._id)} className="btn btn-danger btn-sm">Delete</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 };
