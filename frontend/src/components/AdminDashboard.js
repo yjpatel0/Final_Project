@@ -64,7 +64,6 @@ const AdminDashboard = () => {
 
   const handleCategorySubmit = async (e) => {
     e.preventDefault();
-    console.log('Submitting category:', newCategory); // Debugging line
     try {
       await axios.post('http://localhost:5000/api/categories', { name: newCategory });
       fetchCategories();
@@ -76,7 +75,8 @@ const AdminDashboard = () => {
 
   const handleProductDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/products/${id}`);
+      const response = await axios.delete(`http://localhost:5000/api/products/${id}`);
+      console.log('Delete response:', response.data);  // Add this line
       fetchProducts();
     } catch (error) {
       console.error('Error deleting product:', error);
@@ -85,7 +85,8 @@ const AdminDashboard = () => {
 
   const handleCategoryDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/categories/${id}`);
+      const response = await axios.delete(`http://localhost:5000/api/categories/${id}`);
+      console.log('Delete response:', response.data);  // Add this line
       fetchCategories();
     } catch (error) {
       console.error('Error deleting category:', error);

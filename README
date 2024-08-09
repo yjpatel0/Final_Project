@@ -2,40 +2,46 @@
 
 **Student Name:** Yash Patel  
 **Student Number:** 8981052  
-**Date:** 07/19/2024
+**Date:** 08/08/2024
 
 ## Project Setup
 
 ### Backend
 
-1. Navigate to the `backend` directory:
+1. Navigate to the backend directory:
+
     ```sh
     cd backend
     ```
 
 2. Install dependencies:
+
     ```sh
     npm install
     ```
 
 3. Start the backend server:
+
     ```sh
     node server.js
     ```
 
 ### Frontend
 
-4. Navigate to the `frontend` directory:
+4. Navigate to the frontend directory:
+
     ```sh
     cd ../frontend
     ```
 
 5. Install dependencies:
+
     ```sh
     npm install
     ```
 
 6. Start the React app:
+
     ```sh
     npm start
     ```
@@ -45,6 +51,7 @@
 - **Product Listings:** Display products with details.
 - **Shopping Cart:** Allow users to add products to a cart and manage the cart.
 - **Checkout Process:** Implement a simple checkout process, including order summary.
+- **Admin Dashboard:** Admin login and CRUD operations for managing items and categories.
 
 ## Technology Stack
 
@@ -59,8 +66,7 @@
 - **description:** String
 - **price:** Number
 - **category:** String
-- **stock:** Number
-- **imageUrl:** String
+- **image:** String (optional)
 
 ### Users Schema
 - **username:** String
@@ -70,4 +76,6 @@
 ## Notes
 
 - The project is set up using Git and GitHub for version control.
-- Further development will include implementing user interfaces for product listings, shopping cart, and checkout.
+- The backend includes routes for managing products, with functionality for creating, updating, deleting, and retrieving products.
+- The frontend application integrates with the backend API to manage product listings, shopping cart, and checkout process.
+- Admin functionality includes login and CRUD operations for products and categories.

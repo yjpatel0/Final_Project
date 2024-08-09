@@ -1,4 +1,3 @@
-// project/backend/controllers/categoryController.js
 const Category = require('../models/categoryModel');
 
 // Get all categories
