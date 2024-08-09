@@ -1,4 +1,3 @@
-// project/backend/controllers/productController.js
 const Product = require('../models/productModel');
 
 // Get all products
@@ -26,18 +25,19 @@ const getProductById = async (req, res) => {
 
 // Create a new product
 const createProduct = async (req, res) => {
+  console.log('Request body:', req.body);
   const product = new Product({
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
     category: req.body.category,
-    image: req.body.image,
   });
 
   try {
     const newProduct = await product.save();
     res.status(201).json(newProduct);
   } catch (error) {
+    console.error('Error creating product:', error);
     res.status(400).json({ message: error.message });
   }
 };
@@ -54,7 +54,6 @@ const updateProduct = async (req, res) => {
     product.description = req.body.description || product.description;
     product.price = req.body.price || product.price;
     product.category = req.body.category || product.category;
-    product.image = req.body.image || product.image;
 
     const updatedProduct = await product.save();
     res.json(updatedProduct);

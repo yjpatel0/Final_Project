@@ -8,7 +8,7 @@ const AdminLogin = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    // Replace with your own authentication logic
+    // Hardcoded credentials for testing
     if (username === 'admin' && password === 'password') {
       localStorage.setItem('isAuthenticated', 'true');
       navigate('/admin');

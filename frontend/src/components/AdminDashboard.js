@@ -64,6 +64,7 @@ const AdminDashboard = () => {
 
   const handleCategorySubmit = async (e) => {
     e.preventDefault();
+    console.log('Submitting category:', newCategory); // Debugging line
     try {
       await axios.post('http://localhost:5000/api/categories', { name: newCategory });
       fetchCategories();

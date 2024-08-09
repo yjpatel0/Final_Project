@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const productRoutes = require('./routes/productRoutes');
+const categoryRoutes = require('./routes/categoryRoutes'); // Add categoryRoutes import
 require('dotenv').config();
 
 const app = express();
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .catch((error) => console.error('Could not connect to MongoDB:', error));
 
 app.use('/api/products', productRoutes);
+app.use('/api/categories', categoryRoutes); // Add category routes
 
 app.get('/', (req, res) => {
   res.send('Hello, this is the backend server');
